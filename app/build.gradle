@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 //apply plugin: 'com.github.dcendents.android-maven'
@@ -25,7 +26,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        applicationId 'org.traccar.client'
+        //applicationId 'org.traccar.client'
         buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 32
