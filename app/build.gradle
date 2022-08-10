@@ -49,7 +49,7 @@ android {
         }
         google
         hidden {
-            applicationId 'org.traccar.client.hidden'
+           // applicationId 'org.traccar.client.hidden'
             buildConfigField 'boolean', 'HIDDEN_APP', 'true'
         }
     }
