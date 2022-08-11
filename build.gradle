@@ -10,9 +10,21 @@ buildscript {
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        //classpath project(":app")
+
 
     }
 }
+
+//defaultConfig {
+//    applicationId 'org.traccar.client'
+//    //buildConfigField 'boolean', 'HIDDEN_APP', 'false'
+//    minSdkVersion 16
+//    targetSdkVersion 32
+//    versionCode 78
+//    versionName '6.17'
+//    multiDexEnabled true
+//}
 
 allprojects {
     repositories {

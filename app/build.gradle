@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 //apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.Connectia'
-
+version = '1.5'
 
 //task androidSourcesJar(type: Jar) {
 //    classifier 'sources'
@@ -35,6 +35,12 @@ android {
         multiDexEnabled true
     }
     namespace 'org.traccar.client'
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 
     packagingOptions {
         resources {
@@ -48,10 +54,10 @@ android {
             isDefault = true
         }
         google
-        hidden {
-           // applicationId 'org.traccar.client.hidden'
-            buildConfigField 'boolean', 'HIDDEN_APP', 'true'
-        }
+//        hidden {
+//           // applicationId 'org.traccar.client.hidden'
+//            buildConfigField 'boolean', 'HIDDEN_APP', 'true'
+//        }
     }
 
     testOptions {
@@ -72,6 +78,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.judemanutd:autostarter:1.1.0'
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
@@ -98,5 +105,30 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains('Googl
 
     afterEvaluate {
         preBuild.dependsOn copyJson
+        publishing {
+            publications {
+                // Creates a Maven publication called "release".
+                release(MavenPublication) {
+                    from components.release
+                    groupId = 'com.github.Connectia'
+                    artifactId = 'traccar-client-android'
+                    version = '1.5'
+                }
+            }
+        }
     }
 }
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.Connectia'
+//                artifactId = 'traccar-client-android'
+//                version = '1.5'
+//            }
+//        }
+//    }
+//}
