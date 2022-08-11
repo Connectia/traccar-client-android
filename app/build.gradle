@@ -4,21 +4,37 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 //apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.Connectia'
-version = '1.0.8'
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-               // from components.release
-                groupId = 'com.github.Connectia'
-                artifactId = 'traccar-client-android'
-                version = '1.0.8'
+version = '1.0.9'
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//               // from components.release
+//                groupId = 'com.github.Connectia'
+//                artifactId = 'traccar-client-android'
+//                version = '1.0.8'
+//            }
+//        }
+//    }
+//
+//}
+// Publish default flavour as main artifact, otherwise the maven pom is not generated
+if( android.productFlavors.size() > 0 ) {
+    android.libraryVariants.all { variant ->
+        if( android.publishNonDefault && variant.name == android.defaultPublishConfig ) {
+            def bundleTask = tasks["bundle${name.capitalize()}"]
+            artifacts {
+                archives(bundleTask.archivePath) {
+                    classifier null
+                    builtBy bundleTask
+                }
             }
         }
     }
-
 }
+
+
 //task androidSourcesJar(type: Jar) {
 //    classifier 'sources'
 //    from android.sourceSets.main.java.srcDirs
@@ -105,7 +121,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.judemanutd:autostarter:1.1.0'
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
