@@ -4,8 +4,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 //apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.Connectia'
-version = '1.5'
+version = '1.0.6'
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+               // from components.release
+                groupId = 'com.github.Connectia'
+                artifactId = 'traccar-client-android'
+                version = '1.0.6'
+            }
+        }
+    }
 
+}
 //task androidSourcesJar(type: Jar) {
 //    classifier 'sources'
 //    from android.sourceSets.main.java.srcDirs
@@ -27,7 +40,7 @@ android {
 
     defaultConfig {
         //applicationId 'org.traccar.client'
-        buildConfigField 'boolean', 'HIDDEN_APP', 'false'
+       // buildConfigField 'boolean', 'HIDDEN_APP', 'false'
         minSdkVersion 16
         targetSdkVersion 32
         versionCode 78
@@ -68,6 +81,20 @@ android {
     lint {
         checkReleaseBuilds false
     }
+//    afterEvaluate {
+//
+//        publishing {
+//            publications {
+//                // Creates a Maven publication called "release".
+//                release(MavenPublication) {
+//                    from components.release
+//                    groupId = 'com.github.Connectia'
+//                    artifactId = 'traccar-client-android'
+//                    version = '1.5'
+//                }
+//            }
+//        }
+//    }
 }
 
 dependencies {
@@ -105,30 +132,9 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains('Googl
 
     afterEvaluate {
         preBuild.dependsOn copyJson
-        publishing {
-            publications {
-                // Creates a Maven publication called "release".
-                release(MavenPublication) {
-                    from components.release
-                    groupId = 'com.github.Connectia'
-                    artifactId = 'traccar-client-android'
-                    version = '1.5'
-                }
-            }
-        }
+
     }
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            // Creates a Maven publication called "release".
-//            release(MavenPublication) {
-//                from components.release
-//                groupId = 'com.github.Connectia'
-//                artifactId = 'traccar-client-android'
-//                version = '1.5'
-//            }
-//        }
-//    }
-//}
+
+

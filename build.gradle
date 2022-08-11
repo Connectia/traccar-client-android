@@ -1,3 +1,5 @@
+
+
 buildscript {
     ext.kotlin_version = '1.6.10'
     repositories {
@@ -33,3 +35,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
