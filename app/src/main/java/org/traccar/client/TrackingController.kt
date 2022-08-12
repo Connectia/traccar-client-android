@@ -27,7 +27,7 @@ import android.util.Log
 import org.traccar.client.DatabaseHelper.DatabaseHandler
 import org.traccar.client.RequestManager.RequestHandler
 
-class TrackingController(private val context: Context) : PositionListener, NetworkHandler {
+public class TrackingController(private val context: Context) : PositionListener, NetworkHandler {
 
     private val handler = Handler(Looper.getMainLooper())
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
